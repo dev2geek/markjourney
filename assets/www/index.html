@@ -17,6 +17,9 @@
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxS4EAxj3r95RhmnKZNjZjdA981ZIkOBY&sensor=true&language=zh"></script>
 <script type="text/javascript" src="cordova-2.1.0.js"></script>
 
+<!-- 共用js -->
+<script type="text/javascript" src="javascript/purl.js"></script>
+
 <!--场景js-->
 <script type="text/javascript" src="javascript/mark-jour.js"></script>
 
@@ -31,7 +34,7 @@
 <script type="text/javascript">
 	$(document).bind("pageinit", function () {
         var MJ = window.MJ;
-
+        
         MJ.login.init();
         $(MJ.login).on('finish',function(){
             $.mobile.changePage('#mytrip');
@@ -41,10 +44,145 @@
         $('#mark-jour').live("pageshow", function (e, ui) {
             window.MJ.markJour.init();
         });
+        
+        window.localStorage.setItem("1122334455", JSON.stringify({
+    		"name":"阿凡达的奇幻之旅",
+    		"id": "1122334455",
+    		"start-time": "2013",
+    		"image": "23",
+    		"position": "12",
+    		"voice": "2",
+    		"point":[
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 1","imgs":"http://img02.taobaocdn.com/tps/i2/T1qeTeXiBxXXaokqjm-70-40.gif?t=1358150730442","position":{"Ya":20,"Za":30}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 2","imgs":"","position":{"Ya":19.999460877691355,"Za":29.99987662250487}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 3","imgs":"http://img02.taobaocdn.com/tps/i2/T1qeTeXiBxXXaokqjm-70-40.gif?t=1358150742442","position":{"Ya":19.9987589148289,"Za":29.999523101875184}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 4","imgs":"","position":{"Ya":19.997908548212536,"Za":29.998230853975542}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 5","imgs":"http://img02.taobaocdn.com/tps/i2/T1qeTeXiBxXXaokqjm-70-40.gif?t=1358150754445","position":{"Ya":19.99752685371404,"Za":29.996131735594986}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 6","imgs":"","position":{"Ya":19.99720397651775,"Za":29.995226267291514}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 7","imgs":"http://img02.taobaocdn.com/tps/i2/T1qeTeXiBxXXaokqjm-70-40.gif?t=1358150766448","position":{"Ya":19.99631269896006,"Za":29.99511170692449}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 8","imgs":"","position":{"Ya":19.99534091115688,"Za":29.994331924886524}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 9","imgs":"http://img02.taobaocdn.com/tps/i2/T1qeTeXiBxXXaokqjm-70-40.gif?t=1358150778449","position":{"Ya":19.99473648839296,"Za":29.99415107662844}},
+    			{"timestamp": "Aug 24th, 15:03","text": "hello 10","imgs":"","position":{"Ya":19.994526696046492,"Za":29.992626795093656}}
+    		]
+    	}));
 
-        $(document).on("pageshow","#tour-detail", function() {
+        /*
+        window.localStorage.setItem("1122334455", JSON.stringify({
+        	"route": [ {
+        		"l": 22.028,
+        		"r": 113.121,
+        		"img": "",
+        		"isMarker": true,
+        		"timestamp": "15:31 Aug.21",
+        		"text": "hello world 1"
+        		}, {
+            		"l": 22.008,
+            		"r": 113.111,
+            		"img": "",
+            		"isMarker": true,
+            		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 2"
+           		},{
+               		"l": 21.991,
+               		"r": 113.079,
+               		"img": "",
+               		"isMarker": true,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 3"
+           		},{
+               		"l": 21.981,
+               		"r": 113.119,
+               		"img": "",
+               		"isMarker": true,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.981,
+               		"r": 113.119,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.119,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.961,
+               		"r": 113.119,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.129,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.139,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.149,
+               		"img": "",
+               		"isMarker": true,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.159,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.169,
+               		"img": "",
+               		"isMarker": true,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.179,
+               		"img": "",
+               		"isMarker": false,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				},{
+               		"l": 21.971,
+               		"r": 113.189,
+               		"img": "",
+               		"isMarker": true,
+               		"timestamp": "15:31 Aug.21",
+            		"text": "hello world 4"
+				}
+			]
+        }));
+        */
+        
+        /* $(document).on("pagebeforeshow","#tour-detail", function(data) {
+        	debugger;
         	var o = {
-        		"name": "7n"
+        		"id": "1122334455"
+        	};
+        	MJ.detail.render(o);
+    	}); */
+        
+        $(document).on("pageshow","#tour-detail", function(data) {
+        	var d = $(document).data("id");
+        	var o = {
+        		"id": (d ? d : "1122334455")
         	};
         	MJ.detail.render(o);
     	});
@@ -53,12 +191,21 @@
         	$.mobile.loading( 'show', {'text': '正在上传,请稍后...'});
         	e.preventDefault();
         });
+        
+        $("#hhh").on("click", function(e) {
+        	
+        	$.mobile.changePage("index.html#tour-detail", {transition: "slide"});
+        });
 
     });
 </script>
 
 </head>
 <body>
+
+
+
+
 
 <div data-role="page" id="login" class="login">
     <div id="wb_connect_btn" ></div>
@@ -220,7 +367,7 @@
                             <p>Hot Chip</p>
                             <p><span class="routeto">36</span><span class="photos">36</span><span class="records">36</span></p>
                         </a></li>
-                        <li><a href="#">
+                        <li><a href="#tour-detail">
                             <img src="http://img03.taobaocdn.com/tps/i3/T1jJ3UXaleXXceHVsE-115-115.jpg" />
                             <h3>Broken Bells</h3>
                             <p>Broken Bells</p>
@@ -282,97 +429,64 @@
 		<a href="#mytrip" data-icon="home" data-iconpos="notext">旅行列表</a>
 		<a id="tour-upload" href="#" data-rel="popup" data-position-to="window" data-role="button" data-icon="check" data-theme="a">上传</a>
 	</div>
-	<!--popup-->
-	<!-- 
-    <div data-role="popup" id="tour-uploading" data-corners="false" data-theme="none" data-shadow="false" data-tolerance="0,0">
-	    <button data-theme="a" data-icon="back" data-mini="true">Back</button>
-	    <button data-theme="a" data-icon="grid" data-mini="true">Menu</button>
-	    <button data-theme="a" data-icon="search" data-mini="true">Search</button>
-		 
-	</div>
-	 -->
-    
-	<div data-role="content" id="wrapper" class="op-wrapper">
-		<div id="map">
+	
+	<div data-role="content" id="detail-wrapper" class="op-wrapper">
+		<div id="detail-header">
+			<div id="detail-cover">
+				<div id="detail-cover-icon"></div>
+				<div id="detail-cover-title">
+					<div class="detail-cover-title">元旦香港自由行</div>
+					<div>
+						<span class="detail-cover-detail">录音：3</span>
+						<span class="detail-cover-detail">视频：4</span>
+						<span class="detail-cover-detail">照片：5</span></div>
+				</div>
+			</div>
+		</div>
+		<div id="detail-map">
 			
 		</div>
-		
-		<div id="cover">
-			<div id="cover_icon"></div>	
-			<div id="refresh_icon"><img src="image/refresh_2x.png" id="refresh_image" width="24" onclick="load_path();"></div>	
-			<div id="cover_dot"></div>
-			<div id="cover_line"></div>
-			<div id="cover_time"></div>
+		<div id="detail-thread">
+			<div id="detail-refresh">
+				<img src="image/refresh_2x.png"></img>
+			</div>
+			<div id="detail-line">
+			</div>
 		</div>
 		<ul class="scroll" id="path_list">
+			<!-- 
 			<li class="clearfix">
-				<div class="list_avatar" >15:31 Aug.21</div>
-                <div class="list_image">
-                	<img src="image/icp.jpg" class="thumb" onload="myScroll.refresh();" />
+				<div class="list_timeslot">15:31 Aug.21</div>
+				<div class="list_time_dot"></div>
+                <div class="list_moment_wrapper">
+					<span class="arrow">◆</span>
+					<div class="list_moment">
+				 		<div class="list_moment_detail">我在这里看到了一条很大的鱼，很大很大</div>
+					</div>
                 </div>
 			</li>
 			
 			<li class="clearfix">
-				<div class="list_avatar" >15:31 Aug.21</div>
-                <div class="list_image">
-                	<img src="image/wl.jpg" class="thumb" onload="myScroll.refresh();" />
+				<div class="list_timeslot" >15:31 Aug.21</div>
+				<div class="list_time_dot"></div>
+                <div class="list_moment_wrapper">
+					<span class="arrow">◆</span>
+					<div class="list_moment">
+				 		<div class="list_moment_detail">一起弹吉他，唱老歌</div>
+				 		<hr>
+				 		<div class="list_moment_info">
+				 			 <div class="list_image">
+			                	<img src="image/icp.jpg" class="thumb" />
+			                </div>
+				 		</div>
+					</div>
                 </div>
 			</li>
 			
-			<li class="clearfix">
-				<div class="list_avatar">15:31 Aug.21</div>
-				<div class="list_dot_gray"></div>
-                <div class="list_thought_wrapper">
-					<span class="arrow">◆</span>
-					<div class="list_thought">
-				 		我在这里看到了一条很大的鱼，很大很大
-					</div>
-                </div>
-			</li>
-			<li class="clearfix">
-				<div class="list_avatar">15:31 Aug.21</div>
-				<div class="list_dot_gray"></div>
-                <div class="list_thought_wrapper">
-					<span class="arrow">◆</span>
-					<div class="list_thought">
-				 		我在这里看到了一条很大的鱼，很大很大
-					</div>
-                </div>
-			</li>
-			<li class="clearfix">
-				<div class="list_avatar">15:31 Aug.21</div>
-				<div class="list_dot_gray"></div>
-                <div class="list_thought_wrapper">
-					<span class="arrow">◆</span>
-					<div class="list_thought">
-				 		我在这里看到了一条很大的鱼，很大很大
-					</div>
-                </div>
-			</li>
-			<li class="clearfix">
-				<div class="list_avatar">15:31 Aug.21</div>
-				<div class="list_dot_gray"></div>
-                <div class="list_thought_wrapper">
-					<span class="arrow">◆</span>
-					<div class="list_thought">
-				 		我在这里看到了一条很大的鱼，很大很大
-					</div>
-                </div>
-			</li>
-			<li class="clearfix">
-				<div class="list_avatar">15:31 Aug.21</div>
-				<div class="list_dot_gray"></div>
-                <div class="list_thought_wrapper">
-					<span class="arrow">◆</span>
-					<div class="list_thought">
-				 		我在这里看到了一条很大的鱼，很大很大
-					</div>
-                </div>
-			</li>
+			 -->
 		</ul>
-		<div id="more_button" onclick="load_more_path(last_pid);"> 载入更多 </div>
-  			
-			</div>
+		<div id="more_button" style="display:none;"> 载入更多 </div>
+	</div>
 	
 	<!-- <div data-role="footer" data-position="fixed" data-id="vs_footer">
 		<div data-role="navbar">
@@ -389,9 +503,9 @@
 		</div>navbar
 	</div>footer -->
 	<script type="text/javascript">
-		var myScroll = new iScroll('wrapper');
+		//var myScroll = new iScroll('detail-wrapper');
 	</script>
-</div>
+</div><!-- end of detail -->
 
 </body>
 </html>
