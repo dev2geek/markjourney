@@ -20,8 +20,22 @@
              new google.maps.LatLng(21.991, 113.079),
              new google.maps.LatLng(21.981, 113.119)
          ];*/
+    	
+    	function init() {
+    		$("#detail-refresh").click(function() {
+    			$.mobile.changePage(
+				    "index.html#tour-detail",
+				    {
+				      allowSamePageTransition : true,
+				      transition              : 'none',
+				      showLoadMsg             : false,
+				      reloadPage              : true
+				    }
+				);
+    		});
+    	}
         
-    	function initMap(data) {
+    	function initTrip(data) {
     		var givenRoute = data.point,
     			listNode = $("#path_list");
     		$.each(givenRoute, function(index, info) {
@@ -139,22 +153,27 @@
     	    
     	    // Adding the polyline to the map
     	    polyline.setMap(map);
-    	}
-    	
-    	function initTrip() {
-    		console.log("init Trip");
-    		inited = true;
+    	    inited = true;
     	}
 
         return {
             render:function (obj) {
             	var x = obj.id,
-                	obj = localStorage.getItem(x),
-                	data = $.parseJSON(obj);
+            		data;
+            	
+            	var storage = localStorage.getItem("jourlist"),
+            		storageArr = $.parseJSON(storage);
+            	
+            	$.each(storageArr, function(index, value) {
+            		if (value.id === x) {
+            			data = value;
+            			return false;
+            		}
+            	});
                 
             	if (!inited) {
-                	initMap(data);
-                    initTrip();
+                	init();
+                    initTrip(data);
                 }
             }
         }
